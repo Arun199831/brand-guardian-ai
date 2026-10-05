@@ -37,7 +37,7 @@ def index_video_node(state: VideoAuditState) -> Dict[str, Any]:
     if not _is_youtube_url(video_url):
         return _indexer_failure(video_id, video_url, "Invalid or missing YouTube URL.")
 
-    local_path = "temp_audit_video.mp4"  # set BEFORE try so `finally` can always see it
+    local_path = f"temp_{video_id}.mp4"
 
     try:
         service = VideoIndexerService()
@@ -114,10 +114,12 @@ OFFICIAL REGULATORY RULES:
 INSTRUCTIONS:
 1. Analyze the transcript and on-screen text below.
 2. Identify ANY violations of the rules above.
-3. Return ONLY a JSON array. No prose, no markdown.
+3. Only report violations you can CONFIRM from the transcript, on-screen text or metadata provided.
+   Do NOT report "potential" violations, and do NOT flag rules you cannot verify from the data.
+4. Return ONLY a JSON array. No prose, no markdown.
    Each item must look like:
    {{"category": "...", "description": "...", "severity": "low|medium|high", "timestamp": "mm:ss or null"}}
-4. If there are no violations, return [].
+5. If there are no violations, return [].
 """
     user_message = f"""VIDEO METADATA: {video_metadata}
 TRANSCRIPT: {transcript}
