@@ -1,0 +1,25 @@
+# --- Secrets ---
+.env
+.env.*
+!.env.example
+local.settings.json
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# --- Project temp files ---
+temp_*.mp4
+*.mp4
+*.part
+*.ytdl
+
+# --- OS / Editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
